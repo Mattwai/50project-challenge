@@ -50,7 +50,7 @@ export default function Component() {
             <Button
               variant="outline"
               size="sm"
-              className="border-gray-700 text-gray-300 hover:bg-gray-800 hover:text-white"
+              className="border-gray-700 text-gray-700 hover:bg-gray-800 hover:text-white"
             >
               <Github className="h-4 w-4 mr-2" />
               GitHub
@@ -89,21 +89,6 @@ export default function Component() {
                 {completedCount} projects completed • {50 - completedCount} remaining
               </p>
             </div>
-
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" className="bg-blue-600 hover:bg-blue-700 text-white">
-                <Trophy className="h-5 w-5 mr-2" />
-                View Projects
-              </Button>
-              <Button
-                variant="outline"
-                size="lg"
-                className="border-gray-600 text-gray-300 hover:bg-gray-800 hover:text-white"
-              >
-                <Github className="h-5 w-5 mr-2" />
-                Follow Journey
-              </Button>
-            </div>
           </div>
         </div>
       </section>
@@ -130,7 +115,7 @@ export default function Component() {
                 className={`transition-all duration-200 ${
                   filter === key
                     ? "bg-blue-600 hover:bg-blue-700 text-white"
-                    : "border-gray-600 text-gray-300 hover:bg-gray-800 hover:text-white"
+                    : "border-gray-600 text-gray-700 hover:bg-gray-800 hover:text-white"
                 }`}
               >
                 {label} ({count})
@@ -188,8 +173,8 @@ export default function Component() {
                   </CardTitle>
                   <CardDescription className="text-sm text-gray-400">{project.description}</CardDescription>
                 </CardHeader>
-                <CardContent>
-                  <div className="flex flex-wrap gap-1 mb-4">
+                <CardContent className="flex flex-col h-[120px]">
+                  <div className="flex flex-wrap gap-1 h-[52px] content-start">
                     {project.technologies.map((tech) => (
                       <Badge
                         key={tech}
@@ -201,36 +186,13 @@ export default function Component() {
                     ))}
                   </div>
 
-                  <div className="flex gap-2">
-                    {project.status === "completed" ? (
-                      <>
-                        <Button
-                          size="sm"
-                          variant="outline"
-                          className="flex-1 border-gray-600 text-gray-300 hover:bg-gray-800 hover:text-white"
-                          asChild
-                        >
-                          <Link href={project.githubUrl} target="_blank">
-                            <Github className="h-3 w-3 mr-1" />
-                            Code
-                          </Link>
-                        </Button>
-                        <Button size="sm" className="flex-1 bg-blue-600 hover:bg-blue-700 text-white" asChild>
-                          <Link href={project.liveUrl} target="_blank">
-                            <ExternalLink className="h-3 w-3 mr-1" />
-                            Live
-                          </Link>
-                        </Button>
-                      </>
-                    ) : project.status === "in-progress" ? (
-                      <Button size="sm" variant="outline" className="w-full border-gray-600 text-gray-400" disabled>
-                        <Timer className="h-3 w-3 mr-1" />
-                        In Development
-                      </Button>
-                    ) : (
-                      <Button size="sm" variant="outline" className="w-full border-gray-600 text-gray-400" disabled>
-                        <Calendar className="h-3 w-3 mr-1" />
-                        Coming Soon
+                  <div className="flex gap-2 mt-auto">
+                    {project.status === "completed" && (
+                      <Button size="sm" className="w-full bg-blue-600 hover:bg-blue-700 text-gray-100" asChild>
+                        <Link href={project.liveUrl} target="_blank">
+                          <ExternalLink className="h-3 w-3 mr-1" />
+                          View Project
+                        </Link>
                       </Button>
                     )}
                   </div>
@@ -274,15 +236,6 @@ export default function Component() {
               <span className="text-lg font-semibold text-white">50 Projects Challenge</span>
             </div>
             <p className="text-gray-400 mb-6">Building the future of B2B SaaS, one project at a time.</p>
-            <div className="flex justify-center space-x-4">
-              <Button variant="ghost" size="sm" className="text-gray-300 hover:text-white hover:bg-gray-800">
-                <Github className="h-4 w-4 mr-2" />
-                GitHub
-              </Button>
-              <Button variant="ghost" size="sm" className="text-gray-300 hover:text-white hover:bg-gray-800">
-                Follow Journey
-              </Button>
-            </div>
           </div>
         </div>
       </footer>
