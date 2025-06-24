@@ -7,22 +7,9 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Progress } from "@/components/ui/progress"
 import { Calendar, ExternalLink, Github, Rocket, Timer, Trophy } from "lucide-react"
 import Link from "next/link"
+import { projects } from "@/config/projects"
 
 // Sample project data - you can replace this with your actual projects
-const projects = Array.from({ length: 50 }, (_, i) => ({
-  id: i + 1,
-  title: `Project ${i + 1}`,
-  description:
-    i < 15
-      ? `A powerful B2B SaaS solution with modern architecture and scalable design`
-      : `Coming soon - exciting B2B SaaS project in development`,
-  status: i < 15 ? "completed" : i < 25 ? "in-progress" : "upcoming",
-  githubUrl: `https://github.com/yourusername/project-${i + 1}`,
-  liveUrl: `https://yourusername.github.io/project-${i + 1}`,
-  day: i + 1,
-  technologies: ["React", "TypeScript", "Tailwind CSS", "Next.js"].slice(0, Math.floor(Math.random() * 4) + 1),
-}))
-
 const completedCount = projects.filter((p) => p.status === "completed").length
 const progressPercentage = (completedCount / 50) * 100
 
@@ -168,26 +155,34 @@ export default function Component() {
                       {project.status === "upcoming" && <div className="h-2 w-2 bg-gray-500 rounded-full" />}
                     </div>
                   </div>
-                  <CardTitle className="text-lg text-white group-hover:text-blue-400 transition-colors">
-                    {project.title}
-                  </CardTitle>
-                  <CardDescription className="text-sm text-gray-400">{project.description}</CardDescription>
+                  <div className="h-[56px]">
+                    <CardTitle className="text-lg text-white group-hover:text-blue-400 transition-colors line-clamp-2">
+                      {project.title}
+                    </CardTitle>
+                  </div>
+                  <div className="h-[72px]">
+                    <CardDescription className="text-sm text-gray-400 line-clamp-3">
+                      {project.description}
+                    </CardDescription>
+                  </div>
                 </CardHeader>
                 <CardContent className="flex flex-col h-[120px]">
-                  <div className="flex flex-wrap gap-1 h-[52px] content-start">
-                    {project.technologies.map((tech) => (
-                      <Badge
-                        key={tech}
-                        variant="outline"
-                        className="text-xs bg-gray-800/50 text-gray-300 border-gray-600"
-                      >
-                        {tech}
-                      </Badge>
-                    ))}
+                  <div className="h-[72px]">
+                    <div className="flex flex-wrap gap-1">
+                      {project.technologies.map((tech) => (
+                        <Badge
+                          key={tech}
+                          variant="outline"
+                          className="text-xs bg-gray-800/50 text-gray-300 border-gray-600"
+                        >
+                          {tech}
+                        </Badge>
+                      ))}
+                    </div>
                   </div>
 
                   <div className="flex gap-2 mt-auto">
-                    {project.status === "completed" && (
+                    {project.status === "completed" && project.liveUrl && (
                       <Button size="sm" className="w-full bg-blue-600 hover:bg-blue-700 text-gray-100" asChild>
                         <Link href={project.liveUrl} target="_blank">
                           <ExternalLink className="h-3 w-3 mr-1" />
