@@ -283,7 +283,7 @@ export default function Component() {
               Building the future of B2B SaaS, one project at a time.
             </p>
             <p className="text-gray-400 mb-6">
-              Contact Us: waidevelops@gmail.com
+              Contact Us: ydevelops@gmail.com
             </p>
           </div>
         </div>
