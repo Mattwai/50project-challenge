@@ -1,22 +1,31 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Progress } from "@/components/ui/progress"
-import { Calendar, ExternalLink, Github, Rocket, Timer, Trophy } from "lucide-react"
-import Link from "next/link"
-import { projects } from "@/config/projects"
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Progress } from "@/components/ui/progress";
+import { projects } from "@/config/projects";
+import { Calendar, ExternalLink, Github, Rocket, Timer } from "lucide-react";
+import Link from "next/link";
+import { useState } from "react";
 
 // Sample project data - you can replace this with your actual projects
-const completedCount = projects.filter((p) => p.status === "completed").length
-const progressPercentage = (completedCount / 50) * 100
+const completedCount = projects.filter((p) => p.status === "completed").length;
+const progressPercentage = (completedCount / 50) * 100;
 
 export default function Component() {
-  const [filter, setFilter] = useState<"all" | "completed" | "in-progress" | "upcoming">("all")
+  const [filter, setFilter] = useState<
+    "all" | "completed" | "in-progress" | "upcoming"
+  >("all");
 
-  const filteredProjects = filter === "all" ? projects : projects.filter((p) => p.status === filter)
+  const filteredProjects =
+    filter === "all" ? projects : projects.filter((p) => p.status === filter);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black text-white">
@@ -25,13 +34,21 @@ export default function Component() {
         <div className="container mx-auto flex h-16 items-center justify-between px-4">
           <div className="flex items-center space-x-2">
             <Rocket className="h-8 w-8 text-blue-400" />
-            <span className="text-xl font-bold text-white">50 Projects Challenge</span>
+            <span className="text-xl font-bold text-white">
+              50 Projects Challenge
+            </span>
           </div>
           <nav className="hidden md:flex items-center space-x-6">
-            <Link href="#projects" className="text-sm font-medium text-gray-300 hover:text-blue-400 transition-colors">
+            <Link
+              href="#projects"
+              className="text-sm font-medium text-gray-300 hover:text-blue-400 transition-colors"
+            >
               Projects
             </Link>
-            <Link href="#about" className="text-sm font-medium text-gray-300 hover:text-blue-400 transition-colors">
+            <Link
+              href="#about"
+              className="text-sm font-medium text-gray-300 hover:text-blue-400 transition-colors"
+            >
               About
             </Link>
             <Button
@@ -61,19 +78,28 @@ export default function Component() {
               <span className="text-3xl md:text-5xl">in 50 Days</span>
             </h1>
             <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
-              Building a new B2B SaaS solution every single day. From CRM systems to analytics platforms, each project
-              showcases modern web development and business solutions.
+              Building a new B2B SaaS solution every single day. From CRM
+              systems to analytics platforms, each project showcases modern web
+              development and business solutions.
             </p>
 
             {/* Progress Section */}
             <div className="bg-gray-800/50 backdrop-blur-sm rounded-2xl p-6 shadow-2xl max-w-md mx-auto mb-8 border border-gray-700">
               <div className="flex items-center justify-between mb-3">
-                <span className="text-sm font-medium text-gray-300">Progress</span>
-                <span className="text-sm font-bold text-blue-400">{completedCount}/50</span>
+                <span className="text-sm font-medium text-gray-300">
+                  Progress
+                </span>
+                <span className="text-sm font-bold text-blue-400">
+                  {completedCount}/50
+                </span>
               </div>
-              <Progress value={progressPercentage} className="h-3 mb-2 bg-gray-700" />
+              <Progress
+                value={progressPercentage}
+                className="h-3 mb-2 bg-gray-700"
+              />
               <p className="text-xs text-gray-400">
-                {completedCount} projects completed • {50 - completedCount} remaining
+                {completedCount} projects completed • {50 - completedCount}{" "}
+                remaining
               </p>
             </div>
           </div>
@@ -86,13 +112,22 @@ export default function Component() {
           <div className="flex flex-wrap gap-2 justify-center">
             {[
               { key: "all", label: "All Projects", count: projects.length },
-              { key: "completed", label: "Completed", count: projects.filter((p) => p.status === "completed").length },
+              {
+                key: "completed",
+                label: "Completed",
+                count: projects.filter((p) => p.status === "completed").length,
+              },
               {
                 key: "in-progress",
                 label: "In Progress",
-                count: projects.filter((p) => p.status === "in-progress").length,
+                count: projects.filter((p) => p.status === "in-progress")
+                  .length,
               },
-              { key: "upcoming", label: "Upcoming", count: projects.filter((p) => p.status === "upcoming").length },
+              {
+                key: "upcoming",
+                label: "Upcoming",
+                count: projects.filter((p) => p.status === "upcoming").length,
+              },
             ].map(({ key, label, count }) => (
               <Button
                 key={key}
@@ -123,8 +158,8 @@ export default function Component() {
                   project.status === "completed"
                     ? "border-green-700 bg-green-900/20 hover:bg-green-900/30"
                     : project.status === "in-progress"
-                      ? "border-blue-700 bg-blue-900/20 hover:bg-blue-900/30"
-                      : "border-gray-700 bg-gray-800/50 hover:bg-gray-800/70"
+                    ? "border-blue-700 bg-blue-900/20 hover:bg-blue-900/30"
+                    : "border-gray-700 bg-gray-800/50 hover:bg-gray-800/70"
                 }`}
                 style={{
                   animationDelay: `${index * 50}ms`,
@@ -138,8 +173,8 @@ export default function Component() {
                         project.status === "completed"
                           ? "bg-green-900/50 text-green-300 border-green-700 hover:bg-green-800/50"
                           : project.status === "in-progress"
-                            ? "bg-blue-900/50 text-blue-300 border-blue-700 hover:bg-blue-800/50"
-                            : "bg-gray-800/50 text-gray-400 border-gray-600 hover:bg-gray-700/50"
+                          ? "bg-blue-900/50 text-blue-300 border-blue-700 hover:bg-blue-800/50"
+                          : "bg-gray-800/50 text-gray-400 border-gray-600 hover:bg-gray-700/50"
                       }
                     >
                       <Calendar className="h-3 w-3 mr-1" />
@@ -152,7 +187,9 @@ export default function Component() {
                       {project.status === "in-progress" && (
                         <div className="h-2 w-2 bg-blue-400 rounded-full animate-pulse" />
                       )}
-                      {project.status === "upcoming" && <div className="h-2 w-2 bg-gray-500 rounded-full" />}
+                      {project.status === "upcoming" && (
+                        <div className="h-2 w-2 bg-gray-500 rounded-full" />
+                      )}
                     </div>
                   </div>
                   <div className="h-[56px]">
@@ -183,7 +220,11 @@ export default function Component() {
 
                   <div className="flex gap-2 mt-auto">
                     {project.status === "completed" && project.liveUrl && (
-                      <Button size="sm" className="w-full bg-blue-600 hover:bg-blue-700 text-gray-100" asChild>
+                      <Button
+                        size="sm"
+                        className="w-full bg-blue-600 hover:bg-blue-700 text-gray-100"
+                        asChild
+                      >
                         <Link href={project.liveUrl} target="_blank">
                           <ExternalLink className="h-3 w-3 mr-1" />
                           View Project
@@ -203,15 +244,21 @@ export default function Component() {
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
             <div>
-              <div className="text-4xl font-bold mb-2 text-white">{completedCount}</div>
+              <div className="text-4xl font-bold mb-2 text-white">
+                {completedCount}
+              </div>
               <div className="text-blue-200">Projects Completed</div>
             </div>
             <div>
-              <div className="text-4xl font-bold mb-2 text-white">{Math.round(progressPercentage)}%</div>
+              <div className="text-4xl font-bold mb-2 text-white">
+                {Math.round(progressPercentage)}%
+              </div>
               <div className="text-blue-200">Challenge Progress</div>
             </div>
             <div>
-              <div className="text-4xl font-bold mb-2 text-white">{50 - completedCount}</div>
+              <div className="text-4xl font-bold mb-2 text-white">
+                {50 - completedCount}
+              </div>
               <div className="text-blue-200">Days Remaining</div>
             </div>
             <div>
@@ -228,12 +275,19 @@ export default function Component() {
           <div className="text-center">
             <div className="flex items-center justify-center space-x-2 mb-4">
               <Rocket className="h-6 w-6 text-blue-400" />
-              <span className="text-lg font-semibold text-white">50 Projects Challenge</span>
+              <span className="text-lg font-semibold text-white">
+                50 Projects Challenge
+              </span>
             </div>
-            <p className="text-gray-400 mb-6">Building the future of B2B SaaS, one project at a time.</p>
+            <p className="text-gray-400 mb-3">
+              Building the future of B2B SaaS, one project at a time.
+            </p>
+            <p className="text-gray-400 mb-6">
+              Contact Us: waidevelops@gmail.com
+            </p>
           </div>
         </div>
       </footer>
     </div>
-  )
+  );
 }
